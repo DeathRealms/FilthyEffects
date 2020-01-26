@@ -1,0 +1,6 @@
+name: FilthyEffects
+version: @version@
+main: me.deathrealms.filthyeffects.FilthyEffects
+api-version: "1.13"
+authors: [DeathRealms]
+description: Create custom items with special effects.

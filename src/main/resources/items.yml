@@ -1,0 +1,139 @@
+# Attribute Modifier Names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/attribute/Attribute.html
+# Item Flag Names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/inventory/ItemFlag.html
+
+items:
+  netherblade:
+    type: "DIAMOND_SWORD"
+    name: "&2&k||&r&4&lNether &6&lBlade&2&k||&r"
+    lore:
+      - "The Legendary Blade of Eternal Fire"
+    enchantments:
+      sharpness: 10
+      fire_aspect: 5
+      sweeping: 6
+      unbreaking: 8
+    effects:
+      strength: 2
+    modifiers:
+      generic_max_health: 4
+
+  netherbow:
+    type: "BOW"
+    name: "&2&k||&r&4&lNether &6&lBow&2&k||&r"
+    lore:
+      - "Rain Dammnation Upon the Unworthy from the Skies Above"
+    enchantments:
+      power: 5
+      punch: 5
+      infinity: 1
+      flame: 1
+      unbreaking: 8
+    effects:
+      slow_falling: 5
+
+  netherhelmet:
+    type: "DIAMOND_HELMET"
+    name: "&2&k||&r&4&lNether &6&lHelmet&2&k||&r"
+    lore:
+      - "The Crown of the Lord of Fire Himself"
+    enchantments:
+      protection: 10
+      fire_protection: 5
+      thorns: 5
+      respiration: 10
+      unbreaking: 8
+    effects:
+      night_vision: 1
+      luck: 1
+    modifiers:
+      generic_max_health: 4
+
+  netherchestplate:
+    type: "DIAMOND_CHESTPLATE"
+    name: "&2&k||&r&4&lNether &6&lCuriass&2&k||&r"
+    lore:
+      - "Let the Flames of Hell Guard Your Heart in Battle"
+    enchantments:
+      protection: 10
+      fire_protection: 5
+      thorns: 5
+      unbreaking: 8
+    effects:
+      strength: 2
+      regeneration: 1
+    modifiers:
+      generic_max_health: 4
+
+  netherleggings:
+    type: "DIAMOND_LEGGINGS"
+    name: "&2&k||&r&4&lNether &6&lLeggings&2&k||&r"
+    lore:
+      - "Launch Yourself Above the Limits of Mortals"
+    enchantments:
+      protection: 10
+      fire_protection: 5
+      unbreaking: 8
+    effects:
+      jump: 1
+    modifiers:
+      generic_max_health: 4
+
+  netherboots:
+    type: "DIAMOND_BOOTS"
+    name: "&2&k||&r&4&lNether &6&lBoots&2&k||&r"
+    lore:
+      - "Embrace the Speed and Dexterity of a Demon"
+    enchantments:
+      protection: 10
+      fire_protection: 5
+      thorns: 5
+      feather_falling: 5
+      unbreaking: 8
+    effects:
+      speed: 2
+    modifiers:
+      generic_max_health: 4
+
+  filthywings:
+    type: "ELYTRA"
+    name: "&2&k||&r&4&lFilthy &5&lWings&2&k||&r"
+    lore:
+      - "Legendary Wings Crafted from the Scrotums of Logan Paul Fanboys"
+    unbreakable: true
+
+  filthyfunfork:
+    type: "TRIDENT"
+    name: "&2&k||&r&4&lFilthy &d&lFun &3&lFork&2&k||&r"
+    lore:
+      - "The Ultimate “F&kuck&r This Sh&ki&rt I’m Out”"
+    enchantments:
+      unbreaking: 8
+      impaling: 10
+      riptide: 10
+      looting: 5
+    effects:
+      water_breathing: 1
+
+
+  filthyfuckfork:
+    type: "TRIDENT"
+    name: "&2&k||&r&4&lFilthy &1&lF&1&l&kuck&r &3&lFork&r&2&k||&r"
+    lore:
+      - "Fork + Outlet = F"
+    enchantments:
+      unbreaking: 8
+      impaling: 10
+      riptide: 10
+    effects:
+      water_breathing: 1
+
+  filthyrich:
+    type: "DIAMOND_PICKAXE"
+    name: "&a&k||&r&4&lFilthy &2&lRich&r&a&k||&r"
+    enchantments:
+      unbreaking: 12
+      mending: 1
+      efficiency: 10
+      fortune: 10
+    effects:
+      haste: 1
