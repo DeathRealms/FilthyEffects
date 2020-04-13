@@ -8,12 +8,9 @@ import java.util.List;
 public class CustomItem {
     private XMaterial material;
     private String name;
-    private List<String> lore;
-    private List<String> itemFlags;
+    private List<String> lore, itemFlags;
     private boolean unbreakable;
-    private ConfigurationSection enchantments;
-    private ConfigurationSection effects;
-    private ConfigurationSection modifiers;
+    private ConfigurationSection enchantments, effects, modifiers;
 
     public XMaterial getMaterial() {
         return material;

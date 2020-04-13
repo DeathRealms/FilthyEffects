@@ -2,6 +2,7 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.Messages;
+import me.deathrealms.realmsapi.XSound;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
 
@@ -18,5 +19,8 @@ public class ReloadCommand extends SubCommand {
         Messages.load();
         plugin.items.reloadConfig();
         source.sendMessage(Messages.prefix + Messages.reloadConfig);
+        if (source.isPlayer()) {
+            source.getUser().playSound(XSound.BLOCK_NOTE_BLOCK_PLING);
+        }
     }
 }
