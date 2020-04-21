@@ -27,7 +27,8 @@ public class FilthyEffects extends RealmsAPI {
     @Override
     public void onEnable() {
         if (!MinecraftVersion.isCurrentEqualOrHigher(MinecraftVersion.v1_13_R1)) {
-            getLogger().severe(String.format("Disabled due to unsupported server version %s", MinecraftVersion.getCurrent().getShortVersion()));
+            getLogger().severe(String.format("Disabled due to unsupported server version %s", MinecraftVersion.getCurrent().getShortVersion())
+                    + ". Please use version 1.13 or higher.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
