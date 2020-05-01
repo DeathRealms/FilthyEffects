@@ -3,6 +3,7 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.utils.Utils;
 import me.deathrealms.realmsapi.XEnchantment;
+import me.deathrealms.realmsapi.XMaterial;
 import me.deathrealms.realmsapi.XPotion;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EditCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public EditCommand(FilthyEffects plugin) {
         super("edit", "fe.command.edit", true);
@@ -49,6 +50,10 @@ public class EditCommand extends SubCommand {
                 }
                 case "addflag": {
                     source.sendMessage("&cPlease enter an item flag to add.");
+                    break;
+                }
+                case "settype": {
+                    source.sendMessage("&cPlease enter an item type to set.");
                     break;
                 }
                 case "setname": {
@@ -93,7 +98,7 @@ public class EditCommand extends SubCommand {
         if (args.length == 1) {
             return new ArrayList<>(plugin.items.getConfigSection("items").getKeys(false));
         } else if (args.length == 2) {
-            return newList("addeffect", "addenchant", "addmodifier", "addflag", "setname", "setunbreakable", "removeeffect", "removeenchant", "removemodifier",
+            return newList("addeffect", "addenchant", "addmodifier", "addflag", "settype", "setname", "setunbreakable", "removeeffect", "removeenchant", "removemodifier",
                     "removeflag");
         }
         switch (args[1].toLowerCase()) {
@@ -128,6 +133,13 @@ public class EditCommand extends SubCommand {
                     flags.add(flag.name().toLowerCase());
                 }
                 return flags;
+            }
+            case "settype": {
+                List<String> itemTypes = new ArrayList<>();
+                for (XMaterial material : XMaterial.supportedItems()) {
+                    itemTypes.add(material.name().toLowerCase());
+                }
+                return itemTypes;
             }
             case "setunbreakable": {
                 return newList("true", "false");

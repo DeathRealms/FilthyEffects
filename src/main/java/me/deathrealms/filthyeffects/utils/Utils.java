@@ -4,14 +4,17 @@ import me.deathrealms.filthyeffects.CustomItem;
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.Messages;
 import me.deathrealms.filthyeffects.listeners.EffectsListener;
+import me.deathrealms.realmsapi.RealmsAPI;
 import me.deathrealms.realmsapi.XEnchantment;
 import me.deathrealms.realmsapi.XMaterial;
 import me.deathrealms.realmsapi.XPotion;
 import me.deathrealms.realmsapi.items.ItemBuilder;
 import me.deathrealms.realmsapi.source.CommandSource;
 import me.deathrealms.realmsapi.user.User;
+import net.md_5.bungee.api.chat.ClickEvent;
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -20,13 +23,10 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Utils extends me.deathrealms.realmsapi.utils.Utils {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public Utils(FilthyEffects plugin) {
         this.plugin = plugin;
@@ -39,12 +39,24 @@ public class Utils extends me.deathrealms.realmsapi.utils.Utils {
         } else {
             source.sendMessage("&7&m----------------------------------------------------");
             source.sendMessage("&cItem: &f" + itemName);
-            source.sendMessage("&cType: &f" + item.getMaterial().toWord());
+            source.sendComponent("&cType: &f" + item.getMaterial().toWord(),
+                    "fe.command.edit",
+                    "/fe edit " + itemName + " settype ",
+                    Collections.singletonList("&cClick to perform &f/fe edit " + itemName + " settype "),
+                    ClickEvent.Action.SUGGEST_COMMAND);
             if (item.getName() != null) {
-                source.sendMessage("&cName: &f" + item.getName());
+                source.sendComponent("&cName: &f" + item.getName(),
+                        "fe.command.edit",
+                        "/fe edit " + itemName + " setname ",
+                        Collections.singletonList("&cClick to perform &f/fe edit " + itemName + " setname "),
+                        ClickEvent.Action.SUGGEST_COMMAND);
             }
             if (item.isUnbreakable()) {
-                source.sendMessage("&cUnbreakable: &f" + item.isUnbreakable());
+                source.sendComponent("&cUnbreakable: &f" + item.isUnbreakable(),
+                        "fe.command.edit",
+                        "/fe edit " + itemName + " setunbreakable ",
+                        Collections.singletonList("&cClick to perform &f/fe edit " + itemName + " setunbreakable "),
+                        ClickEvent.Action.SUGGEST_COMMAND);
             }
             if (item.getItemFlags() != null && !item.getItemFlags().isEmpty()) {
                 source.sendMessage("&cItem Flags: ");
@@ -152,6 +164,17 @@ public class Utils extends me.deathrealms.realmsapi.utils.Utils {
                     }
                     break;
                 }
+                case "settype": {
+                    try {
+                        ItemStack itemType = new ItemStack(Material.valueOf(ChatColor.stripColor(key.toUpperCase())));
+                        plugin.items.set("items." + itemName + ".type", itemType.getType().name());
+                        source.sendMessage("&aSet item type of &f" + itemName + " &ato &f" + itemType.getType().name().toLowerCase());
+                        plugin.loadCustomItems();
+                    } catch (IllegalArgumentException ignored) {
+                        source.sendMessage("&cPlease enter a valid item type.");
+                    }
+                    break;
+                }
                 case "setname": {
                     plugin.items.set("items." + itemName + ".name", key);
                     source.sendMessage("&aSet name of &f" + itemName + " &ato &f" + key);
@@ -235,7 +258,7 @@ public class Utils extends me.deathrealms.realmsapi.utils.Utils {
         }
     }
 
-    public void giveItem(CommandSource source, User user, String itemName, int amount) {
+    public void giveItem(CommandSource source, User user, String itemName, int amount, boolean giveAll) {
         EffectsListener effectsListener = new EffectsListener(plugin);
         CustomItem item = plugin.getItem(itemName);
         if (item == null) {
@@ -319,10 +342,22 @@ public class Utils extends me.deathrealms.realmsapi.utils.Utils {
                     user.getLocation().getWorld().dropItemNaturally(user.getLocation(), itemStack);
                 }
             }
-            user.sendMessage(Messages.prefix + Messages.giveItem.replace("%item_name%", itemName)
-                    .replace("%item_display_name%", item.getName() != null ? item.getName() : itemName)
-                    .replace("%player%", user.getName())
-                    .replace("%amount%", String.valueOf(amount)));
+            if (giveAll) {
+                RealmsAPI.broadcast(Messages.prefix + Messages.giveAllItem.replace("%item_name%", itemName)
+                        .replace("%item_display_name%", item.getName() != null ? item.getName() : itemName)
+                        .replace("%amount%", String.valueOf(amount)));
+            } else {
+                source.sendMessage(Messages.prefix + Messages.giveItem.replace("%item_name%", itemName)
+                        .replace("%item_display_name%", item.getName() != null ? item.getName() : itemName)
+                        .replace("%player%", user.getName())
+                        .replace("%amount%", String.valueOf(amount)));
+                if (!user.getName().equals(source.getName())) {
+                    user.sendMessage(Messages.prefix + Messages.giveItem.replace("%item_name%", itemName)
+                            .replace("%item_display_name%", item.getName() != null ? item.getName() : itemName)
+                            .replace("%player%", user.getName())
+                            .replace("%amount%", String.valueOf(amount)));
+                }
+            }
             effectsListener.removeAllBoundItemEffects(user);
             effectsListener.addItemEffects(user, true, false, true);
         }
