@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RemoveCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public RemoveCommand(FilthyEffects plugin) {
         super("remove", "fe.command.remove", true);

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GiveCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public GiveCommand(FilthyEffects plugin) {
         super("give", "fe.command.give", true);
@@ -31,7 +31,7 @@ public class GiveCommand extends SubCommand {
             if (target.getBase() == null) {
                 source.sendMessage("&cPlayer not found");
             } else {
-                utils.giveItem(source, target, args[1], 1);
+                utils.giveItem(source, target, args[1], 1, false);
             }
         } else {
             User target = RealmsAPI.getUser(args[0]);
@@ -41,7 +41,7 @@ public class GiveCommand extends SubCommand {
                 if (!NumberUtils.isNumber(args[2])) {
                     source.sendMessage("&cPlease enter a valid amount.");
                 } else {
-                    utils.giveItem(source, target, args[1], Integer.parseInt(args[2]));
+                    utils.giveItem(source, target, args[1], Integer.parseInt(args[2]), false);
                 }
             }
         }

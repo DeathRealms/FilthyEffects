@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public InfoCommand(FilthyEffects plugin) {
         super("info", "fe.command.info", true);

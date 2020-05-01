@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class ListCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public ListCommand(FilthyEffects plugin) {
         super("list", "fe.command.list", true);

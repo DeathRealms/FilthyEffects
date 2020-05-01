@@ -24,7 +24,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.List;
 
 public class EffectsListener implements Listener {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public EffectsListener(FilthyEffects plugin) {
         this.plugin = plugin;

@@ -7,7 +7,7 @@ import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
 
 public class ReloadCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public ReloadCommand(FilthyEffects plugin) {
         super("reload", "fe.command.reload", true);

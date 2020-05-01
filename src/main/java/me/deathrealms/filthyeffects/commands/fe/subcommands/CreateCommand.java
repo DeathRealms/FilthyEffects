@@ -6,7 +6,7 @@ import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.user.User;
 
 public class CreateCommand extends SubCommand {
-    private FilthyEffects plugin;
+    private final FilthyEffects plugin;
 
     public CreateCommand(FilthyEffects plugin) {
         super("create", "fe.command.create", false);
