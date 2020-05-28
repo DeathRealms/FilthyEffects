@@ -1,12 +1,21 @@
 package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
+import me.deathrealms.filthyeffects.CustomItem;
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.utils.Utils;
-import me.deathrealms.realmsapi.XEnchantment;
-import me.deathrealms.realmsapi.XMaterial;
-import me.deathrealms.realmsapi.XPotion;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
+import me.deathrealms.realmsapi.xseries.XEnchantment;
+import me.deathrealms.realmsapi.xseries.XMaterial;
+import me.deathrealms.realmsapi.xseries.XPotion;
+import me.tom.sparse.spigot.chat.menu.ChatMenu;
+import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
+import me.tom.sparse.spigot.chat.menu.element.BooleanElement;
+import me.tom.sparse.spigot.chat.menu.element.ButtonElement;
+import me.tom.sparse.spigot.chat.menu.element.InputElement;
+import me.tom.sparse.spigot.chat.menu.element.TextElement;
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemFlag;
@@ -19,7 +28,7 @@ public class EditCommand extends SubCommand {
     private final FilthyEffects plugin;
 
     public EditCommand(FilthyEffects plugin) {
-        super("edit", "fe.command.edit", true);
+        super("edit", "fe.command.edit", CommandType.PLAYER_AND_CONSOLE);
         this.plugin = plugin;
     }
 
@@ -32,7 +41,80 @@ public class EditCommand extends SubCommand {
             if (plugin.getItem(args[0]) == null) {
                 source.sendMessage("&cCustom item &f" + args[0] + " &cdoes not exist.");
             } else {
-                source.sendMessage("&cPlease enter an option to edit.");
+                if (source.isPlayer()) {
+                    CustomItem customItem = plugin.getItem(args[0]);
+                    String itemName = args[0].toLowerCase();
+                    ChatMenu page1 = new ChatMenu().pauseChat(130, 19, ChatColor.RED + "[Close]");
+                    ChatMenu page2Flags = new ChatMenu().pauseChat(130, 19, ChatColor.RED + "[Close]");
+                    ChatMenu page3Enchants = new ChatMenu().pauseChat(130, 19, ChatColor.RED + "[Close]");
+                    ChatMenu page4Effects = new ChatMenu().pauseChat(130, 19, ChatColor.RED + "[Close]");
+                    page1.setAutoUnregister(false);
+                    page2Flags.setAutoUnregister(false);
+                    page3Enchants.setAutoUnregister(false);
+                    page4Effects.setAutoUnregister(false);
+
+                    ButtonElement mainPage = new ButtonElement(110, 19, "<<", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page1.openFor(player);
+                    });
+                    ButtonElement flagsPageForward = new ButtonElement(175, 19, ">>", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page2Flags.openFor(player);
+                    });
+                    ButtonElement flagsPageBackward = new ButtonElement(110, 19, "<<", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page2Flags.openFor(player);
+                    });
+                    ButtonElement enchantsPageForward = new ButtonElement(175, 19, ">>", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page3Enchants.openFor(player);
+                    });
+                    ButtonElement enchantsPageBackward = new ButtonElement(110, 19, "<<", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page3Enchants.openFor(player);
+                    });
+                    ButtonElement effectsPage = new ButtonElement(175, 19, ">>", player -> {
+                        ChatMenuAPI.getCurrentMenu(player).close(player);
+                        page4Effects.openFor(player);
+                    });
+
+                    page1.add(flagsPageForward);
+                    page2Flags.add(mainPage);
+                    page2Flags.add(enchantsPageForward);
+                    page3Enchants.add(flagsPageBackward);
+                    page3Enchants.add(effectsPage);
+                    page4Effects.add(enchantsPageBackward);
+
+                    TextElement item = new TextElement(1, 0, ChatColor.RED + "Item: " + ChatColor.WHITE + itemName);
+                    TextElement unbreakable = new TextElement(1, 1, ChatColor.RED + "Unbreakable: " + ChatColor.WHITE + customItem.isUnbreakable());
+                    BooleanElement unbreakableBoolean = new BooleanElement(96, 1, customItem.isUnbreakable());
+                    TextElement type = new TextElement(1, 3, ChatColor.RED + "Type: ");
+                    InputElement typeInput = new InputElement(31, 3, 249, plugin.items.getString("items." + itemName + ".type", "STONE"));
+                    TextElement name = new TextElement(1, 5, ChatColor.RED + "Name: ");
+                    InputElement nameInput = new InputElement(31, 5, 250, plugin.items.getString("items." + itemName + ".name", ""));
+
+                    TextElement flags = new TextElement(1, 1, ChatColor.RED + "Item Flags: ");
+                    int y = 2;
+                    for (String flag : customItem.getItemFlags()) {
+                        ButtonElement flagButton = new ButtonElement(3, y++, flag + ChatColor.RED + " [-]", player -> {
+                            player.performCommand("fe edit " + itemName + " removeflag " + flag);
+                        });
+                        page2Flags.add(flagButton);
+                    }
+
+                    page1.add(item);
+                    page1.add(unbreakable);
+                    page1.add(unbreakableBoolean);
+                    page1.add(type);
+                    page1.add(typeInput);
+                    page1.add(name);
+                    page1.add(nameInput);
+                    page2Flags.add(flags);
+
+                    page1.openFor(source.getPlayer());
+                } else {
+                    source.sendMessage("&cPlease enter an option to edit.");
+                }
             }
         } else if (args.length == 2) {
             switch (args[1].toLowerCase()) {

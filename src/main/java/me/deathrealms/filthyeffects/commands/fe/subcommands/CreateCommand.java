@@ -2,6 +2,7 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.utils.Utils;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.user.User;
 
@@ -9,7 +10,7 @@ public class CreateCommand extends SubCommand {
     private final FilthyEffects plugin;
 
     public CreateCommand(FilthyEffects plugin) {
-        super("create", "fe.command.create", false);
+        super("create", "fe.command.create", CommandType.PLAYER);
         this.plugin = plugin;
     }
 

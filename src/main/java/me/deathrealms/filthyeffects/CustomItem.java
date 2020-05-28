@@ -1,6 +1,6 @@
 package me.deathrealms.filthyeffects;
 
-import me.deathrealms.realmsapi.XMaterial;
+import me.deathrealms.realmsapi.xseries.XMaterial;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;

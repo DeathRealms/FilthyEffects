@@ -2,15 +2,16 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.Messages;
-import me.deathrealms.realmsapi.XSound;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
+import me.deathrealms.realmsapi.xseries.XSound;
 
 public class ReloadCommand extends SubCommand {
     private final FilthyEffects plugin;
 
     public ReloadCommand(FilthyEffects plugin) {
-        super("reload", "fe.command.reload", true);
+        super("reload", "fe.command.reload", CommandType.PLAYER_AND_CONSOLE);
         this.plugin = plugin;
     }
 

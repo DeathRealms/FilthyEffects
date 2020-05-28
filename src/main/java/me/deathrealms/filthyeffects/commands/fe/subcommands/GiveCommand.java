@@ -3,6 +3,7 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.utils.Utils;
 import me.deathrealms.realmsapi.RealmsAPI;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
 import me.deathrealms.realmsapi.user.User;
@@ -15,7 +16,7 @@ public class GiveCommand extends SubCommand {
     private final FilthyEffects plugin;
 
     public GiveCommand(FilthyEffects plugin) {
-        super("give", "fe.command.give", true);
+        super("give", "fe.command.give", CommandType.PLAYER_AND_CONSOLE);
         this.plugin = plugin;
     }
 

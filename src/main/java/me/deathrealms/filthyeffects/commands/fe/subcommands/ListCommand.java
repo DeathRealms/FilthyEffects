@@ -2,6 +2,7 @@ package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
 import me.deathrealms.filthyeffects.FilthyEffects;
 import me.deathrealms.filthyeffects.Messages;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
 import me.deathrealms.realmsapi.user.User;
@@ -12,7 +13,7 @@ public class ListCommand extends SubCommand {
     private final FilthyEffects plugin;
 
     public ListCommand(FilthyEffects plugin) {
-        super("list", "fe.command.list", true);
+        super("list", "fe.command.list", CommandType.PLAYER_AND_CONSOLE);
         this.plugin = plugin;
     }
 

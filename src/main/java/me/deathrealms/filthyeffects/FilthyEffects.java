@@ -3,9 +3,9 @@ package me.deathrealms.filthyeffects;
 import me.deathrealms.filthyeffects.commands.fe.FECommand;
 import me.deathrealms.filthyeffects.listeners.EffectsListener;
 import me.deathrealms.realmsapi.RealmsAPI;
-import me.deathrealms.realmsapi.XMaterial;
 import me.deathrealms.realmsapi.files.CustomFile;
 import me.deathrealms.realmsapi.packets.MinecraftVersion;
+import me.deathrealms.realmsapi.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 

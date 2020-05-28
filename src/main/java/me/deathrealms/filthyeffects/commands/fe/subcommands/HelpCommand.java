@@ -1,6 +1,7 @@
 package me.deathrealms.filthyeffects.commands.fe.subcommands;
 
 import me.deathrealms.filthyeffects.Messages;
+import me.deathrealms.realmsapi.command.CommandType;
 import me.deathrealms.realmsapi.command.SubCommand;
 import me.deathrealms.realmsapi.source.CommandSource;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -8,7 +9,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 public class HelpCommand extends SubCommand {
 
     public HelpCommand() {
-        super("help", "fe.command.help", true);
+        super("help", "fe.command.help", CommandType.PLAYER_AND_CONSOLE);
     }
 
     @Override
